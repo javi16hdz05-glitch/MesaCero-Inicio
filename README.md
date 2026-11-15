@@ -1,72 +1,94 @@
-# Mesa Cero — Inicio Angular
+# Mesa Cero — Angular · Diseño de Figma
 
-Proyecto académico nuevo e independiente para Programación Web. Primera etapa: interfaz de restaurante con Angular 19, TypeScript, HTML y CSS. Preparado para incorporar Java, Servlets, JDBC y PostgreSQL más adelante.
+Versión visual del sistema Mesa Cero para la materia de Programación Web, basada en la **página 15** del archivo [MesaCero – Wireframes completos](https://www.figma.com/design/EXC1XNJzy2SUPA2I1kmG3y/MesaCero-%E2%80%93-Wireframes-completos?node-id=96-331).
 
-## Requisitos
+## Requisitos y ejecución (Windows)
 
-- Git.
-- Node.js 22 LTS compatible con Angular 19 y npm.
-- Visual Studio Code (recomendado).
+- Node.js 22 y npm.
+- Visual Studio Code.
+- GitHub Desktop para sincronizar el repositorio.
 
-## Ejecutar en Windows (PowerShell)
+Abre la carpeta `MesaCero-Inicio` en VS Code. En la terminal PowerShell:
 
 ```powershell
 cd frontend
-npm ci
-npm start
+npm.cmd ci
+npm.cmd start
 ```
 
-Abrir http://localhost:4200.
+Luego entra a **http://localhost:4200/**. Para detener Angular, presiona `Ctrl+C` en la terminal.
 
-## Funciones disponibles
+## Qué incluye esta entrega
 
-- Inicio: indicadores y navegación.
-- Mesas: listar y cambiar estados.
-- Carta: consultar y filtrar productos.
-- Comandas: elegir mesa, añadir productos, calcular total y registrar en memoria.
-- Diseño adaptable a computadora y teléfono.
+- Navegación de cliente: bienvenida, inicio con selección del chef, carta, bebidas, detalle dinámico de platillos, carrito, confirmación de pedido, reservación, selección de mesa, acceso, registro, perfil e historiales.
+- Navegación de personal: acceso, mesas, pedido, cocina, cobro y cierre.
+- Administración: dashboard, mesas, productos, reservaciones y ventas.
+- Recuperación de acceso y 12 estados de error/acceso, disponibles como rutas de demostración.
+- Imágenes originales de los platillos de Figma almacenadas localmente en `frontend/public/assets`.
+- **Dos temas generados desde código:** oscuro basado en el diseño de Figma y claro con la misma jerarquía y lenguaje visual.
+- Adaptación para móvil, tablet y computadora mediante CSS Grid, Flexbox y media queries.
 
-**Importante:** los datos son ficticios y viven solo en memoria: desaparecen al recargar. La aplicación no utiliza todavía un backend, autenticación ni PostgreSQL.
+**Esta es una primera implementación integral de las rutas y patrones visuales, no una auditoría píxel por píxel de cada estado del archivo de Figma.** Algunas pantallas de Figma representan variantes de un mismo flujo, que aquí se resuelven mediante estado e interacciones. Valida cada pantalla importante contra el diseño original antes de entregarla a la profesora.
 
-## Estructura
+## Navegación rápida
+
+| Sección | Ruta |
+| --- | --- |
+| Bienvenida | `/bienvenida` |
+| Inicio cliente | `/inicio` |
+| Carta | `/carta` |
+| Reservar | `/reserva` |
+| Carrito | `/carrito` |
+| Acceso mesero | `/personal/acceso` |
+| Mesas de mesero | `/personal/mesas` |
+| Dashboard admin | `/admin/resumen` |
+| Productos admin | `/admin/productos` |
+| Error 404 | `/error/404` |
+
+## Cómo se organiza el proyecto
 
 ```text
 MesaCero-Inicio/
 ├── frontend/
-│   └── src/app/
-│       ├── pages/       # Pantallas con rutas Angular
-│       ├── models/      # Tipos de datos compartidos
-│       ├── services/    # Lógica y datos de demostración
-│       ├── app.routes.ts
-│       └── app.component.ts
-├── docs/                 # Guías de crecimiento
-├── .gitignore
+│   ├── public/assets/                  # Fotos e iconos locales de Figma
+│   ├── src/app/
+│   │   ├── pages/                      # Cliente, personal, admin y estados
+│   │   ├── models/                     # Tipos compartidos de TypeScript
+│   │   ├── services/
+│   │   │   ├── restaurante.service.ts  # Datos y acciones simuladas
+│   │   │   └── tema.service.ts         # Cambio claro/oscuro
+│   │   ├── app.routes.ts               # Rutas del sistema
+│   │   └── app.component.ts            # Cabeceras y navegación adaptable
+│   └── src/styles.css                  # Variables de tema y responsive
+├── docs/PLAN_DE_INTEGRACION.md
 └── README.md
 ```
 
-## Publicarlo en un repositorio NUEVO de GitHub
+## Importante sobre los datos
 
-1. Crear un repositorio vacío en GitHub con nombre `MesaCero-Inicio`, sin README ni .gitignore automáticos.
-2. Abrir PowerShell en la carpeta `MesaCero-Inicio` y ejecutar:
+Las interacciones actualmente usan datos **ficticios y temporales en memoria**: desaparecen al actualizar la página. Inicio de sesión, envío de códigos, cobros y gráficas administrativas **no son operaciones reales**. Aún no hay servidor, Servlets ni PostgreSQL. No usar como aplicación de producción ni ingresar contraseñas verdaderas.
 
-```powershell
-git init
-git add .
-git commit -m "feat: iniciar proyecto Angular de Mesa Cero"
-git branch -M main
-git remote add origin https://github.com/TU_USUARIO/MesaCero-Inicio.git
-git push -u origin main
-```
+## Actualizar tu repositorio de GitHub Desktop
 
-Sustituir `TU_USUARIO` por tu cuenta. Para colaborar, invitar a los compañeros desde Settings > Collaborators. Trabajar con ramas y pull requests.
+Si ya tienes `MesaCero-Inicio` publicado, **no crees otro repositorio**:
 
-## Compilar
+1. Descarga el nuevo ZIP.
+2. Descomprímelo en una carpeta temporal.
+3. Copia el contenido de `MesaCero-Inicio` del ZIP dentro de la carpeta de tu repositorio local, reemplazando archivos cuando Windows lo solicite. **Conserva la carpeta oculta `.git` del repositorio**; no la sustituyas ni elimines.
+4. Abre GitHub Desktop: aparecerán los cambios.
+5. Revisa la lista de archivos, escribe un resumen como `feat: integrar diseño de Figma página 15` y realiza **Commit to main** (o una rama si estás trabajando en equipo).
+6. Presiona **Push origin**.
+7. Desde VS Code ejecuta `npm.cmd ci` y `npm.cmd start` para probar localmente.
+
+**Recomendación de equipo:** realizar cambios de nuevas pantallas en ramas y fusionarlos mediante Pull Requests.
+
+## Compilar para verificar
 
 ```powershell
 cd frontend
-npm run build
+npm.cmd run build
 ```
 
-## Próxima etapa
+## Próximas integraciones
 
-Consultar [Plan de integración](docs/PLAN_DE_INTEGRACION.md).
+Consulta [docs/PLAN_DE_INTEGRACION.md](docs/PLAN_DE_INTEGRACION.md) para añadir Java Servlets, API REST y PostgreSQL sin cambiar la interfaz. La [tabla de correspondencia con Figma](docs/PANTALLAS_FIGMA.md) documenta qué vistas se estudiaron en detalle y qué falta contrastar.
