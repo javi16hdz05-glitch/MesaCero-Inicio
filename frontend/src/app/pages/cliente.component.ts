@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { RestauranteService } from '../services/restaurante.service';
 import { Producto } from '../models/restaurant.models';
+import { CascadaComponent } from '../components/cascada/cascada.component';
 
-@Component({selector:'app-cliente',standalone:true,imports:[CurrencyPipe,FormsModule,RouterLink],template:`
+@Component({selector:'app-cliente',standalone:true,imports:[CurrencyPipe,FormsModule,RouterLink,CascadaComponent],template:`
   @if(page==='bienvenida') {
     <div class="welcome-grid"><div class="welcome-copy"><h1>Sabor que inspira.<br>Momentos que permanecen.</h1><p>Conoce una nueva forma de disfrutar la cocina oaxaqueña.</p></div>
       <div class="heritage-art" role="img" aria-label="Emblema decorativo de cocina tradicional"><div class="plate"><div class="plate-center"><span></span><i></i><b></b></div></div><span>TRADICIÓN · ELEGANCIA · INNOVACIÓN</span></div>
@@ -15,8 +16,8 @@ import { Producto } from '../models/restaurant.models';
     <div class="discovery"><div class="search-wrap"><span>⌕</span><input aria-label="Buscar platillos y bebidas" placeholder="Buscar platillos y bebidas..." [ngModel]="busqueda()" (ngModelChange)="busqueda.set($event)"><a routerLink="/carta" aria-label="Abrir carta">☷</a></div>
       <div class="pills">@for(c of categoriasInicio;track c){<button [class.active]="categoria()===c" (click)="categoria.set(c)">{{c}}</button>}</div>
       <a class="explore-banner" routerLink="/carta"><span>▣ &nbsp; Explorar menú completo</span><b>→</b></a>
-      <h2 class="section-title">Selección del chef</h2><p class="section-subtitle">Dos columnas · desliza y descubre</p>
-      <div class="featured-grid">@for(p of productosFiltrados();track p.id){<article class="featured-card"><a [routerLink]="['/detalle',p.id]" class="featured-image"><img [src]="p.foto" [alt]="p.nombre">@if(p.etiqueta){<span class="ribbon">{{p.etiqueta}}</span>}</a><div class="featured-info"><h3>{{p.nombre}}</h3><div class="featured-actions"><span>{{p.precio|currency:'MXN':'symbol':'1.0-0'}} MXN</span><button [attr.aria-label]="'Agregar '+p.nombre" (click)="datos.cambiarCantidad(p.id,1)">+</button></div></div></article>}</div>
+      <h2 class="section-title">Selección del chef</h2>
+      <app-cascada [productos]="productosFiltrados()"></app-cascada>
     </div>
   } @else if(page==='carta'||page==='bebidas') {
     <div class="page-heading"><span class="eyebrow">{{page==='bebidas'?'BARRA DE LA CASA':'MENÚ DE TEMPORADA'}}</span><h1>{{page==='bebidas'?'Bebidas y maridaje':'Nuestra carta'}}</h1><p>{{page==='bebidas'?'Una selección para acompañar cada momento.':'Sabores artesanales elaborados con ingredientes locales.'}}</p></div>
@@ -69,6 +70,8 @@ export class ClienteComponent {
   readonly producto=computed(()=>this.datos.productos().find(p=>p.id===Number(this.route.snapshot.paramMap.get('id'))));
   readonly productosFiltrados=computed(()=>this.datos.productos().filter(p=>p.disponible&&(this.categoria()==='Todos'||p.categoria===this.categoria())&&p.nombre.toLowerCase().includes(this.busqueda().toLowerCase())));
   readonly cartaFiltrada=computed(()=>this.datos.productos().filter(p=>p.disponible&&(this.page==='bebidas'?p.categoria==='Bebidas':this.categoria()==='Todos'?p.categoria!=='Bebidas':p.categoria===this.categoria())));
+  readonly cascadaPausada = signal(false);
+  readonly cascadaInvertida = signal(false);
   nombre='';telefono='';password='';
   encontrar(id:number):Producto|undefined{return this.datos.productos().find(p=>p.id===id);}
   actualizarReserva(key:'fecha'|'hora'|'zona',value:string):void{this.datos.reservaPendiente.update(x=>({...x,[key]:value}));}

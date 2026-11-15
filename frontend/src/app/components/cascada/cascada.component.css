@@ -1,0 +1,86 @@
+:host { display: block; }
+
+.cascada { max-width: 590px; margin: 0 auto 22px; }
+
+.cascada-controles {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 0 14px;
+}
+
+.cascada-controles button {
+  padding: 8px 17px;
+  border: 1px solid var(--outline);
+  border-radius: 30px;
+  background: var(--surface-raised);
+  color: var(--gold);
+  font-size: 11px;
+}
+
+.cascada-controles button:hover { border-color: var(--gold); }
+
+.cascada-ventana {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  height: 455px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 7%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 7%, #000 91%, transparent 100%);
+}
+
+.cascada-columna { min-width: 0; overflow: hidden; }
+.cascada-columna.desfasada { padding-top: 70px; }
+
+.cascada-pista {
+  display: flex;
+  flex-direction: column;
+  animation: desplazamiento-cascada var(--duracion) linear infinite;
+  will-change: transform;
+}
+
+.cascada-pista.sentido-contrario { animation-direction: reverse; }
+
+.cascada-grupo {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-bottom: 15px;
+}
+
+.cascada-tarjeta {
+  flex: none;
+  height: 236px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  text-align: left;
+}
+
+.cascada-tarjeta .featured-image { flex: none; height: 139px; }
+.cascada-tarjeta .featured-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+.cascada-tarjeta .featured-info h3 { min-height: 0; font-size: clamp(19px, 2.6vw, 23px); line-height: 1.05; }
+.cascada-tarjeta .featured-actions { gap: 4px; }
+.cascada-tarjeta .featured-actions span { font-size: 11px; }
+.cascada-tarjeta .featured-actions button { flex: 0 0 33px; }
+
+.cascada-ayuda { margin: 12px auto 0; text-align: center; font-size: 10px; }
+
+@keyframes desplazamiento-cascada {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-50%); }
+}
+
+@media (max-width: 400px) {
+  .cascada-ventana { gap: 12px; }
+  .cascada-tarjeta { height: 226px; }
+  .cascada-tarjeta .featured-image { height: 128px; }
+  .cascada-tarjeta .featured-info h3 { font-size: 19px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cascada-pista { animation: none !important; }
+  .cascada-columna { overflow-y: auto; scrollbar-width: thin; }
+  .cascada-grupo:nth-child(2) { display: none; }
+}
