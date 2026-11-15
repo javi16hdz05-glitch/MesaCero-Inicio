@@ -1,0 +1,44 @@
+# ==========================================
+# Mesa Cero - Git Ignore
+# ==========================================
+
+# Node & Angular
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/.sass-cache/
+frontend/npm-debug.log*
+frontend/yarn-debug.log*
+frontend/yarn-error.log*
+
+# Java & Maven
+backend/target/
+*.class
+*.war
+*.ear
+*.jar
+*.log
+
+# Entornos de Desarrollo (IDE)
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+.nb-gradle/
+
+# Sistema Operativo
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
