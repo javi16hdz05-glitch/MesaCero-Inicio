@@ -91,4 +91,4 @@ npm.cmd run build
 
 ## Próximas integraciones
 
-Consulta [docs/PLAN_DE_INTEGRACION.md](docs/PLAN_DE_INTEGRACION.md) para añadir Java Servlets, API REST y PostgreSQL sin cambiar la interfaz. La [tabla de correspondencia con Figma](docs/PANTALLAS_FIGMA.md) documenta qué vistas se estudiaron en detalle y qué falta contrastar.
+Consulta [docs/PLAN_DE_INTEGRACION.md](docs/PLAN_DE_INTEGRACION.md) para añadir Java Servlets, API REST y PostgreSQL sin cambiar la interfaz. La [tabla de correspondencia con Figma](docs/PANTALLAS_FIGMA.md) documenta qué vistas se estudiaron en detalle y qué falta contrastar
