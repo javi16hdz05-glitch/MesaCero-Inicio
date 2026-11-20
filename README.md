@@ -66,7 +66,7 @@ MesaCero-Inicio/
 
 ## Importante sobre los datos
 
-Las interacciones actualmente usan datos **ficticios y temporales en memoria**: desaparecen al actualizar la página. Inicio de sesión, envío de códigos, cobros y gráficas administrativas **no son operaciones reales**. Aún no hay servidor, Servlets ni PostgreSQL. No usar como aplicación de producción ni ingresar contraseñas verdaderas.
+Las interacciones actualmente usan datos **ficticios y temporales en memoria**: desaparecen al actualizar la página. Inicio de sesión, envío de códigos, cobros y gráficas administrativas **no son operaciones reales**. El backend (Servlets, DAO y PostgreSQL) está en la carpeta `backend/`; consulta [backend/README.md](backend/README.md) para instalarlo. Si el backend no está encendido, la interfaz usa datos de respaldo en memoria. No usar como aplicación de producción ni ingresar contraseñas verdaderas.
 
 ## Actualizar tu repositorio de GitHub Desktop
 
